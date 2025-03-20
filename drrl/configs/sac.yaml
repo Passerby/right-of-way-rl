@@ -1,0 +1,224 @@
+seed: 42
+algo: sac
+env:
+  env_name: "intersection"
+  neighbours_distance: 20
+  phi: 0.10 # 0 ~ 90 -> 0 ~ 0.5 degree
+  safe_distance_ratio: 0.0 # 0 ~ 1
+
+n_steps: 128
+n_lstm: 1
+gamma: 0.985
+tau:  0.005
+lam: 0.95
+epoch: 8
+learning_rate: 4.5e-4
+q_lr: 2.5e-3
+
+max_grad_norm: 0.5
+batch_size: 4096 # 4096 # 最大 2400, gd 1.2s per times， 1200 -> gd 0.6s
+model_save_freq: 30
+target_policy_diff: null
+
+policy:
+  placeholder:
+    max_agents: 40
+    max_teams: 1
+    # observation_space: [259] # single
+    observation_space: [91] # 91 or 96
+    observation_space_type: None
+    action_space: 2
+
+evaluation_server:
+  play_mode: self-play
+
+hosts:
+  rollout_worker:
+    - host_name: localhost
+      host_ip: 0.0.0.0
+  gpu_server:
+    - host_name: localhost
+      host_ip: 0.0.0.0
+      gpu_num: 4
+
+  name_server:
+    host: 0.0.0.0
+
+  training_server:
+    host:
+      - 0.0.0.0
+
+  inference_server:
+    - ip: 0.0.0.0
+      gpu: 0
+      cpu: 4
+
+  log_server:
+    host: 0.0.0.0
+
+  evaluation_server:
+    host: 0.0.0.0
+
+log_server:
+  exp_name: "meta-driver-sac"
+
+name_server:
+  port: 8000
+  host: 0.0.0.0
+
+moni:
+  agent:
+    avg:
+      - tag: apm
+        output_freq: 500
+      - tag: ep_reward
+        output_freq: 10
+      - tag: ep_len
+        output_freq: 10
+      - tag: success
+        output_freq: 10
+      - tag: out_of_road
+        output_freq: 10
+      - tag: crash_vehicle
+        output_freq: 10
+    max:
+      - tag: inf_server_response_time
+        output_freq: 500
+      - tag: action_max_prb
+        output_freq: 5
+      - tag: agent_sample_ratio
+        output_freq: 5
+    min:
+      - tag: apm
+        output_freq: 500
+    per_min:
+      - tag: env_steps
+        output_freq: 500
+  evaluation_server:
+    avg:
+      - tag: win_rate
+        output_freq: 1
+      - tag: model_pool_length
+        output_freq: 1
+      - tag: build_in_ep_reward
+        output_freq: 1
+      - tag: eval_size
+        output_freq: 1
+      - tag: population_h
+        output_freq: 1
+      - tag: population_variance
+        output_freq: 1
+      - tag: population_std_dev
+        output_freq: 1
+      - tag: first_elo
+        output_freq: 1
+      - tag: second_elo
+        output_freq: 1
+      - tag: first_ep_reward
+        output_freq: 1
+      - tag: second_ep_reward
+        output_freq: 1
+      - tag: nash_conv
+        output_freq: 1
+      - tag: second_0_kl
+        output_freq: 1
+      - tag: first_0_kl
+        output_freq: 1
+
+  inference_server:
+    avg:
+      - tag: model_delay_time
+        output_freq: 5
+      - tag: inf_server_count
+        output_freq: 5
+      - tag: inf_server_load_model_time
+        output_freq: 5
+    per_min:
+      - tag: inf_server_receive_instance
+        output_freq: 5
+  model:
+    avg:
+      - tag: qf1_loss
+        output_freq: 10
+      - tag: qf2_loss
+        output_freq: 10
+      - tag: qf_loss
+        output_freq: 10
+      - tag: actor_loss
+        output_freq: 10
+      - tag: actor_grads
+        output_freq: 10
+      - tag: qf_grads
+        output_freq: 10
+      - tag: qf_next_target
+        output_freq: 10
+      - tag: next_q_v
+        output_freq: 10
+      - tag: min_qf_pi
+        output_freq: 10
+      - tag: alpha
+        output_freq: 10
+      - tag: entropy
+        output_freq: 10
+  name_server:
+    avg:
+      - tag: register
+        output_freq: 1
+      - tag: register_gpu
+        output_freq: 1
+      - tag: discovery_all
+        output_freq: 1
+      - tag: discovery_inference
+        output_freq: 1
+      - tag: discovery_train
+        output_freq: 1
+      - tag: discovery_agent
+        output_freq: 1
+      - tag: discovery_log_server
+        output_freq: 1
+      - tag: discovery_pub_model_server
+        output_freq: 1
+      - tag: discovery_all_gpu
+        output_freq: 1
+      - tag: discovery_available_gpu
+        output_freq: 1
+      - tag: all_keys
+        output_freq: 1
+      - tag: get_task
+        output_freq: 1
+      - tag: keep_alive
+        output_freq: 1
+  training_server:
+    avg:
+      - tag: learning_rate
+        output_freq: 5
+      - tag: action_entropy_parameter
+        output_freq: 5
+      - tag: data_efficiency
+        output_freq: 5
+      - tag: policy_different
+        output_freq: 5
+      - tag: total_sgd_time
+        output_freq: 5
+      - tag: sgd_time
+        output_freq: 5
+      - tag: receive_data_time
+        output_freq: 5
+      - tag: total_training_time
+        output_freq: 5
+      - tag: wait_data_server_count
+        output_freq: 5
+    max:
+      - tag: sgd_time
+        output_freq: 5
+    min:
+      - tag: sgd_time
+        output_freq: 5
+    total:
+      - tag: training_steps
+        output_freq: 5
+    per_min:
+      - tag: sgd_round
+        output_freq: 10
+      - tag: receive_instance_total
+        output_freq: 10
