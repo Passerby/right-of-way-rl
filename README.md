@@ -87,10 +87,6 @@ PYTHONPATH=. python server.py --config-name ppo
 PYTHONPATH=. python client.py --config-name ppo
 ```
 
-#### 4. Run Inference
-```bash
-PYTHONPATH=. python infer.py --config-name ppo
-```
 
 ## 📚 Citation
 
