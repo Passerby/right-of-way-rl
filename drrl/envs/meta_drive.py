@@ -93,6 +93,10 @@ class MultiAgentSafetyWrapper(gym.Wrapper):
         self.prestep_agents = None
 
     @property
+    def agents(self):
+        return self.env.agents
+
+    @property
     def vehicles(self):
         return list(self.env.engine.get_objects(filter=lambda o: isinstance(o, BaseVehicle)).values())
 

@@ -43,7 +43,7 @@ class LogServer:
 
         exp_name = self.cfg.log_server["exp_name"]
         time_now = datetime.datetime.now().strftime("%m%d%H%M%S")
-        self.summary_writer = SummaryWriter(f"/summary_dir/log_{cfg.env.env_name}_agents_{cfg.policy.placeholder.max_agents}_{cfg.env.phi}_{cfg.env.neighbours_distance}_{cfg.env.safe_distance_ratio}_{time_now}_{exp_name}")
+        self.summary_writer = SummaryWriter(f"./summary_log/log_{cfg.env.env_name}_agents_{cfg.policy.placeholder.max_agents}_{cfg.env.phi}_{cfg.env.neighbours_distance}_{cfg.env.safe_distance_ratio}_{time_now}_{exp_name}")
         self.summary_logger = SummaryLog(self.summary_writer)
 
         self.worker_uid_dict = {}

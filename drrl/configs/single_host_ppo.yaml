@@ -20,7 +20,7 @@ learning_rate: 2.5e-4
 clip_range: 0.2
 clip_range_vf: 10.0
 max_grad_norm: 0.5
-batch_size: 4096
+batch_size: 1024
 model_save_freq: 30
 target_policy_diff: 8
 
@@ -43,7 +43,7 @@ hosts:
   gpu_server:
     - host_name: localhost
       host_ip: 0.0.0.0
-      gpu_num: 4
+      gpu_num: 1
 
   name_server:
     host: 0.0.0.0

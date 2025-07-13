@@ -16,7 +16,7 @@ learning_rate: 4.5e-4
 q_lr: 2.5e-3
 
 max_grad_norm: 0.5
-batch_size: 4096 # 4096 # 最大 2400, gd 1.2s per times， 1200 -> gd 0.6s
+batch_size: 4096
 model_save_freq: 30
 target_policy_diff: null
 
