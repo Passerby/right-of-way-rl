@@ -52,6 +52,17 @@ PYTHONPATH=. python main.py --config-name single_host_ppo
 - 🎯 **Success Rate**: 30/40 vehicles (75%) reach destination
 - 📈 **Improvement**: Performance continues to improve with longer training
 
+#### Training Curves
+
+<div align="center">
+
+| Episode Reward Progression | Success Rate Improvement |
+|:---------------------------:|:-------------------------:|
+| <img src="images/ep_reward.png" width="400"/> | <img src="images/success.png" width="400"/> |
+
+*Figure: TensorBoard training curves showing episode reward reaching ~2,784 and success rate improvement over 5 million training samples on single V100 GPU.*
+
+</div>
 
 > 💡 **Tip**: This single-host version is specifically designed for researchers who want to quickly reproduce our results without setting up a distributed system. The distributed version offers even better scalability for production use.
 
@@ -80,30 +91,6 @@ PYTHONPATH=. python client.py --config-name ppo
 ```bash
 PYTHONPATH=. python infer.py --config-name ppo
 ```
-
-## 📊 Performance Results
-
-Our approach demonstrates significant improvements in multi-agent intersection scenarios:
-
-- **Success Rate**: 75% (30 out of 40 vehicles successfully navigate intersection)
-- **Training Efficiency**: 5 million samples in 3 hours (single V100 GPU)
-- **Episode Reward**: Reaches ~2,784 after 5M training samples
-- **Scalability**: Supports up to 40 concurrent vehicles in complex intersection environments
-- **Safety**: Built-in collision avoidance and right-of-way coordination
-- **Continuous Improvement**: Performance increases with extended training
-
-### Training Curves
-
-<div align="center">
-
-| Episode Reward Progression | Success Rate Improvement |
-|:---------------------------:|:-------------------------:|
-| <img src="images/ep_reward.png" width="400"/> | <img src="images/success.png" width="400"/> |
-
-*Figure: TensorBoard training curves showing episode reward reaching ~2,784 and success rate improvement over 5 million training samples on single V100 GPU.*
-
-</div>
-
 
 ## 📚 Citation
 
